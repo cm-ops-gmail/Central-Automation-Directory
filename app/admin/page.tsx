@@ -710,10 +710,7 @@ export default function AdminPage() {
               <ArrowLeft size={12} /> Dashboard
             </Link>
             <div className="flex items-center gap-2">
-              <div className="w-7 h-7 rounded-lg flex items-center justify-center"
-                style={{ background: "linear-gradient(135deg, #6366f1, #8b5cf6)" }}>
-                <Zap size={13} className="text-white" />
-              </div>
+              <img src="/logo.png" alt="Logo" style={{ width: "28px", height: "28px", borderRadius: "7px", objectFit: "contain" }} />
               <h1 className="font-extrabold text-white text-sm">Admin Panel</h1>
             </div>
           </div>
