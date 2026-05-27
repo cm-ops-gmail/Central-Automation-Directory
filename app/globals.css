@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* { box-sizing: border-box; }
+
+body {
+  background-color: #030712;
+  color: #f1f5f9;
+}
+
+/* ── Animations ─────────────────────────────────────────────────────────── */
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 8px 0 var(--glow, rgba(99,102,241,0.4)); }
+  50%       { box-shadow: 0 0 20px 4px var(--glow, rgba(99,102,241,0.4)); }
+}
+
+@keyframes border-flow {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes scanline {
+  0%   { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+/* ── Card animations ────────────────────────────────────────────────────── */
+
+.hub-card {
+  animation: fadeInUp 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.hub-card:hover {
+  transform: translateY(-5px) scale(1.01);
+  box-shadow: 0 0 0 1px var(--glow, rgba(99,102,241,0.5)),
+              0 8px 32px -4px var(--glow, rgba(99,102,241,0.25)),
+              0 0 60px -12px var(--glow, rgba(99,102,241,0.2));
+  border-color: var(--glow, rgba(99,102,241,0.5)) !important;
+}
+
+/* ── Buttons ────────────────────────────────────────────────────────────── */
+
+.link-btn {
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+}
+.link-btn:hover {
+  transform: translateY(-1px);
+  opacity: 1 !important;
+}
+.link-btn-demo:hover  { box-shadow: 0 0 14px rgba(16,185,129,0.7); }
+.link-btn-github:hover{ box-shadow: 0 0 14px rgba(148,163,184,0.6); }
+.link-btn-video:hover { box-shadow: 0 0 14px rgba(239,68,68,0.7); }
+.link-btn-docs:hover  { box-shadow: 0 0 14px rgba(59,130,246,0.7); }
+.link-btn-rel:hover   { box-shadow: 0 0 14px rgba(168,85,247,0.7); }
+
+/* ── Section headers ────────────────────────────────────────────────────── */
+
+.section-title {
+  animation: fadeIn 0.3s ease both;
+  text-shadow: 0 0 24px var(--title-glow, transparent);
+}
+
+/* ── Navbar glow line ───────────────────────────────────────────────────── */
+
+.nav-glow-line {
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    #6366f1 30%,
+    #8b5cf6 50%,
+    #06b6d4 70%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: border-flow 4s ease infinite;
+}
+
+/* ── Tab active glow ───────────────────────────────────────────────────── */
+
+.tab-active {
+  animation: glow-pulse 2.5s ease-in-out infinite;
+}
+
+/* ── Scrollbar ──────────────────────────────────────────────────────────── */
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #0f172a; }
+::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #475569; }
+
+/* ── Admin drawer backdrop ──────────────────────────────────────────────── */
+
+.admin-drawer {
+  animation: slideDown 0.3s ease both;
+}
+
+/* ── Line clamp utilities ───────────────────────────────────────────────── */
+
+.line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.line-clamp-3 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+/* ── Grid fade-in stagger via nth-child ─────────────────────────────────── */
+
+.hub-grid > .hub-card:nth-child(1)  { animation-delay: 0ms; }
+.hub-grid > .hub-card:nth-child(2)  { animation-delay: 60ms; }
+.hub-grid > .hub-card:nth-child(3)  { animation-delay: 120ms; }
+.hub-grid > .hub-card:nth-child(4)  { animation-delay: 180ms; }
+.hub-grid > .hub-card:nth-child(5)  { animation-delay: 240ms; }
+.hub-grid > .hub-card:nth-child(6)  { animation-delay: 300ms; }
+.hub-grid > .hub-card:nth-child(7)  { animation-delay: 360ms; }
+.hub-grid > .hub-card:nth-child(8)  { animation-delay: 420ms; }
+.hub-grid > .hub-card:nth-child(n+9){ animation-delay: 480ms; }

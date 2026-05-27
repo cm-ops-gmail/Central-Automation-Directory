@@ -1,0 +1,338 @@
+{
+  "categories": [
+    {
+      "id": "cdt",
+      "name": "CDT Team",
+      "color": "#3B82F6"
+    },
+    {
+      "id": "cpd",
+      "name": "CPD",
+      "color": "#8B5CF6"
+    },
+    {
+      "id": "ce",
+      "name": "CE",
+      "color": "#10B981"
+    },
+    {
+      "id": "teachers",
+      "name": "Teachers",
+      "color": "#F59E0B"
+    },
+    {
+      "id": "class-ops",
+      "name": "Class Ops",
+      "color": "#EF4444"
+    },
+    {
+      "id": "marketing",
+      "name": "Marketing",
+      "color": "#EC4899"
+    },
+    {
+      "id": "program-&-content-managers",
+      "name": "Program & Content Managers",
+      "color": "#6366f1"
+    }
+  ],
+  "projects": [
+    {
+      "id": "quiz-maker",
+      "name": "Quiz Maker [Sheet to Slide]",
+      "version": "2.0",
+      "purpose": "To convert Quiz from sheet to PPTX Slide",
+      "demoLink": "https://quiz-to-pptx-mapper.vercel.app/",
+      "githubLink": "https://github.com/cm-ops-gmail/Quiz-to-PPTX-Template-Mapper",
+      "videoLink": "https://drive.google.com/file/d/1WxrNscTV2UFWI2EKRFMA2BehXStWMkYa/view",
+      "guidelineLink": "https://10minuteschoolsmd-my.sharepoint.com/:w:/g/personal/smd_10minuteschoolsmd_onmicrosoft_com/IQCu_G9kmqTjTKsuRtbRZxZjAXLZ9dDa-9FjcxPEnjTTRHo?e=xwkkRU",
+      "categories": [
+        "cpd",
+        "cdt"
+      ]
+    },
+    {
+      "id": "theory-maker",
+      "name": "Theory Maker [A4 to Slide - Docx to PPTX]",
+      "version": "1.0",
+      "purpose": "A4 doc to class slide conversion",
+      "demoLink": "https://colab.research.google.com/drive/1W0twqy-DLmSO9jJMFfYGtVRou7a8fNRX?usp=sharing",
+      "githubLink": "",
+      "videoLink": "https://drive.google.com/file/d/15ZWFvERxBbGd3A6y74cx77Ci7v4OkGby/view?usp=drive_link",
+      "guidelineLink": "",
+      "alternativeLink": "https://colab.research.google.com/drive/1W0twqy-DLmSO9jJMFfYGtVRou7a8fNRX?usp=sharing",
+      "categories": [
+        "cdt",
+        "cpd"
+      ]
+    },
+    {
+      "id": "content-ocr",
+      "name": "Content OCR [One Pager Root File to One Pager Typed File]",
+      "version": "",
+      "purpose": "To perform OCR on an entire page or a specific selected portion of an image or document.",
+      "demoLink": "https://advanced-ocr-tool-omega.vercel.app/",
+      "githubLink": "",
+      "videoLink": "",
+      "guidelineLink": "https://meadow-lock-db7.notion.site/Advanced-OCR-and-Image-Enhancement-Tool-271f4f581e0d802da0b6d8d2a7503879",
+      "categories": [
+        "cdt",
+        "cpd",
+        "teachers"
+      ]
+    },
+    {
+      "id": "teacher-confirmation-calendar",
+      "name": "Teacher Confirmation Calendar Invitation",
+      "version": "",
+      "purpose": "To automate calendar invitations with teacher confirmation, ensuring efficient scheduling and smooth coordination.",
+      "demoLink": "",
+      "githubLink": "https://github.com/cm-ops-gmail/Teacher-Confirmation-Calendar-Invite",
+      "videoLink": "Teacher Confirmation Report Process [Automatio].mp4",
+      "guidelineLink": "https://meadow-lock-db7.notion.site/Automatic-Teacher-Confirmation-Using-Google-Calendar-Invites-262f4f581e0d80a3a5b7c1e36317880d",
+      "categories": [
+        "class-ops"
+      ]
+    },
+    {
+      "id": "after-class-report",
+      "name": "After Class Report",
+      "version": "",
+      "purpose": "To automatically generate and email after-class reports with key session details, ensuring timely communication and reducing manual effort.",
+      "demoLink": "",
+      "githubLink": "https://github.com/cm-ops-gmail/After-Class-Report",
+      "videoLink": "After class Report.mp4",
+      "guidelineLink": "https://meadow-lock-db7.notion.site/After-Class-Report-262f4f581e0d80169a39cca2154943f3",
+      "categories": [
+        "class-ops"
+      ]
+    },
+    {
+      "id": "content-ops-requisition-dashboard",
+      "name": "Content Ops Requisition Dashboard",
+      "version": "",
+      "purpose": "To centralize ticket creation, resolution, and project tracking in one unified dashboard.",
+      "demoLink": "https://content-ops-project-and-ticket-management-system.vercel.app/",
+      "githubLink": "https://github.com/cm-ops-gmail/content-operations-requisition-dashboard",
+      "videoLink": "https://jam.dev/c/a969c536-760d-4fe2-b27d-8e39aae7b504",
+      "guidelineLink": "https://meadow-lock-db7.notion.site/Content-OPS-Project-and-Ticket-Management-System-2a6f4f581e0d80bc9457e58152c9707a",
+      "categories": [
+        "cdt",
+        "class-ops",
+        "cpd",
+        "ce",
+        "teachers",
+        "marketing"
+      ]
+    },
+    {
+      "id": "json-data-to-table",
+      "name": "JSON Data to Table",
+      "version": "",
+      "purpose": "Convert JSON data into a structured table format.",
+      "demoLink": "https://json-parser-phi.vercel.app/",
+      "githubLink": "",
+      "videoLink": "",
+      "guidelineLink": "",
+      "categories": [
+        "ce",
+        "cpd"
+      ]
+    },
+    {
+      "id": "katex-formatter",
+      "name": "Katex Formatter",
+      "version": "",
+      "purpose": "To instantly convert selected Google Sheets cell content into clean, KaTeX-ready math formatting through automated scripting.",
+      "demoLink": "",
+      "githubLink": "https://github.com/cm-ops-gmail/KateX-Formatter",
+      "videoLink": "",
+      "guidelineLink": "",
+      "categories": [
+        "cpd",
+        "teachers"
+      ]
+    },
+    {
+      "id": "katex-previewer",
+      "name": "KateX Previewer",
+      "version": "",
+      "purpose": "To preview KaTeX-formatted questions as standard mathematical equations directly in Google Sheets.",
+      "demoLink": "",
+      "githubLink": "https://github.com/cm-ops-gmail/KateX-Preview-Quiz-Validator",
+      "videoLink": "",
+      "guidelineLink": "https://meadow-lock-db7.notion.site/Katex-Previewer-2a7f4f581e0d80c09effc845a12a1672",
+      "categories": [
+        "cpd",
+        "teachers"
+      ]
+    },
+    {
+      "id": "agentic-root-file-ocr",
+      "name": "Agentic Root File OCR",
+      "version": "",
+      "purpose": "Automated Document Processing & Classification using agentic OCR workflow.",
+      "demoLink": "https://10-ms-ops-agentic-ocr-workflow.vercel.app/",
+      "githubLink": "",
+      "videoLink": "",
+      "guidelineLink": "https://meadow-lock-db7.notion.site/Agentic-OCR-Suite-Automated-Document-Processing-Classification-System-291f4f581e0d807fb1b0f44d08437b1c",
+      "categories": [
+        "teachers",
+        "cpd",
+        "cdt"
+      ]
+    },
+    {
+      "id": "class-insights-teacher-profile",
+      "name": "Class Insights & Teacher Profile",
+      "version": "",
+      "purpose": "To generate live full-year class insights and reports, including teacher profiles and detailed statistics.",
+      "demoLink": "https://class-teacher-insights-dashboard.vercel.app",
+      "githubLink": "https://github.com/cm-ops-gmail/Class-Teacher-insights-Dashboard",
+      "videoLink": "",
+      "guidelineLink": "https://meadow-lock-db7.notion.site/Teacher-Profile-Analytics-Dashboard-2e5f4f581e0d806080b9ec77a3198a30",
+      "categories": [
+        "class-ops",
+        "teachers",
+        "program-&-content-managers"
+      ]
+    },
+    {
+      "id": "class-ops-live-monitoring",
+      "name": "Class Ops Live Class Monitoring Dashboard",
+      "version": null,
+      "purpose": "To monitor daily and upcoming live class requirements in real time.",
+      "demoLink": "https://ops-live-class-monitoring-dashboard.vercel.app/",
+      "githubLink": "https://github.com/cm-ops-gmail/live-class-monitoring",
+      "videoLink": null,
+      "guidelineLink": null,
+      "categories": [
+        "class-ops"
+      ]
+    },
+    {
+      "id": "studio-booking-dashboard",
+      "name": "Studio Visibility and Booking Dashboard",
+      "version": "",
+      "purpose": "Monitor studio visibility and manage class booking.",
+      "demoLink": "https://studio-class-booking-monitoring-das.vercel.app/",
+      "githubLink": "https://github.com/cm-ops-gmail/studio-class-booking-monitoring-dashboard-main",
+      "videoLink": "",
+      "guidelineLink": "",
+      "categories": [
+        "class-ops",
+        "teachers",
+        "marketing",
+        "program-&-content-managers"
+      ]
+    },
+    {
+      "id": "content-to-code-typst",
+      "name": "Content to Code Workflow (Typst)",
+      "version": "",
+      "purpose": "Convert content documents to Typst code format.",
+      "demoLink": "https://huggingface.co/spaces/Ray1907/copy-of-test-of-test-docx-typst-converter",
+      "githubLink": "https://huggingface.co/spaces/Ray1907/copy-of-test-of-test-docx-typst-converter/tree/main",
+      "videoLink": "",
+      "guidelineLink": "",
+      "categories": [
+        "ce"
+      ]
+    },
+    {
+      "id": "pptx-to-docx",
+      "name": "PPTX to DOCX",
+      "version": null,
+      "purpose": "Convert PowerPoint files to Word document format.",
+      "demoLink": "https://huggingface.co/spaces/Ray1907/pptx-to-docx",
+      "githubLink": "https://github.com/cm-ops-gmail/pptx-to-docx",
+      "videoLink": null,
+      "guidelineLink": null,
+      "categories": [
+        "cdt"
+      ]
+    },
+    {
+      "id": "bulk-s3-upload",
+      "name": "Bulk S3 Upload from Drive Link",
+      "version": "",
+      "purpose": "Upload multiple files to S3 from Google Drive links in bulk.",
+      "demoLink": "",
+      "githubLink": "https://github.com/cm-ops-gmail/Bulk-S3-Upload-from-Drive-link",
+      "videoLink": "",
+      "guidelineLink": "",
+      "categories": [
+        "cpd",
+        "ce"
+      ]
+    },
+    {
+      "id": "paste-image-get-link",
+      "name": "Paste Image & Get Link",
+      "version": null,
+      "purpose": "Paste an image and instantly get a shareable link.",
+      "demoLink": "https://paste-image-get-link.vercel.app/",
+      "githubLink": "https://github.com/cm-ops-gmail/paste-image-get-link",
+      "videoLink": null,
+      "guidelineLink": null,
+      "categories": [
+        "cdt",
+        "cpd"
+      ]
+    }
+  ],
+  "categoryOrder": {
+    "cdt": [
+      "quiz-maker",
+      "theory-maker",
+      "pptx-to-docx",
+      "agentic-root-file-ocr",
+      "content-ocr",
+      "paste-image-get-link",
+      "content-ops-requisition-dashboard"
+    ],
+    "cpd": [
+      "katex-formatter",
+      "katex-previewer",
+      "json-data-to-table",
+      "bulk-s3-upload",
+      "quiz-maker",
+      "theory-maker",
+      "agentic-root-file-ocr",
+      "content-ocr",
+      "paste-image-get-link",
+      "content-ops-requisition-dashboard"
+    ],
+    "ce": [
+      "content-to-code-typst",
+      "json-data-to-table",
+      "bulk-s3-upload",
+      "content-ops-requisition-dashboard"
+    ],
+    "teachers": [
+      "class-insights-teacher-profile",
+      "studio-booking-dashboard",
+      "agentic-root-file-ocr",
+      "content-ocr",
+      "katex-formatter",
+      "katex-previewer",
+      "content-ops-requisition-dashboard"
+    ],
+    "class-ops": [
+      "teacher-confirmation-calendar",
+      "after-class-report",
+      "studio-booking-dashboard",
+      "class-insights-teacher-profile",
+      "class-ops-live-monitoring",
+      "content-ops-requisition-dashboard"
+    ],
+    "marketing": [
+      "content-ops-requisition-dashboard",
+      "studio-booking-dashboard"
+    ],
+    "program-&-content-managers": [
+      "class-insights-teacher-profile",
+      "studio-booking-dashboard"
+    ]
+  }
+}
