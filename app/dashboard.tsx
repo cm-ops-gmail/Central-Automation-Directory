@@ -234,7 +234,7 @@ export default function Dashboard({
             maxWidth: "1280px",
             margin: "0 auto",
             padding: "0 24px",
-            height: "64px",
+            height: "140px",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
@@ -247,8 +247,8 @@ export default function Dashboard({
               src="/logo.png"
               alt="Logo"
               style={{
-                width: "52px",
-                height: "52px",
+                width: "128px",
+                height: "128px",
                 borderRadius: "10px",
                 objectFit: "contain",
                 flexShrink: 0,
@@ -293,7 +293,7 @@ export default function Dashboard({
       <div
         style={{
           position: "sticky",
-          top: "64px",
+          top: "140px",
           zIndex: 40,
           backgroundColor: "#040b16",
           borderBottom: "1px solid #1a2535",
