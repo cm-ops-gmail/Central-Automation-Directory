@@ -247,20 +247,15 @@ export default function Dashboard({
               src="/logo.png"
               alt="Logo"
               style={{
-                width: "40px",
-                height: "40px",
+                width: "52px",
+                height: "52px",
                 borderRadius: "10px",
                 objectFit: "contain",
                 flexShrink: 0,
               }}
             />
-            <div>
-              <div style={{ fontWeight: 800, color: "white", fontSize: "15px", lineHeight: 1 }}>
-                Central Automation Hub
-              </div>
-              <div style={{ fontSize: "10px", color: "#475569", marginTop: "3px", letterSpacing: "0.1em", textTransform: "uppercase" }}>
-                Content Operations
-              </div>
+            <div style={{ fontWeight: 800, color: "white", fontSize: "15px", lineHeight: 1 }}>
+              Central Automation Hub
             </div>
           </div>
 
