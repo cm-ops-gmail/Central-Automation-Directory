@@ -1,10 +1,9 @@
-import { readFileSync } from "fs";
-import { join } from "path";
 import Dashboard from "./dashboard";
-import { ProjectsData } from "./types";
+import { getData } from "../lib/data";
 
-export default function Home() {
-  const raw = readFileSync(join(process.cwd(), "data/projects.json"), "utf-8");
-  const data: ProjectsData = JSON.parse(raw);
+export const dynamic = "force-dynamic";
+
+export default async function Home() {
+  const data = await getData();
   return <Dashboard initialData={data} />;
 }
