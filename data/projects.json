@@ -284,8 +284,8 @@
   "categoryOrder": {
     "cdt": [
       "quiz-maker",
-      "theory-maker",
       "pptx-to-docx",
+      "theory-maker",
       "agentic-root-file-ocr",
       "content-ocr",
       "paste-image-get-link",
