@@ -403,6 +403,13 @@
     "program-&-content-managers": [
       "class-insights-teacher-profile",
       "studio-booking-dashboard"
+    ],
+    "dashboards": [
+      "class-insights-teacher-profile",
+      "content-ops-requisition-dashboard",
+      "class-ops-live-monitoring",
+      "studio-booking-dashboard",
+      "mqvzsqa5c0d0k"
     ]
   }
 }
