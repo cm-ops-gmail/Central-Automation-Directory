@@ -237,7 +237,17 @@ function FilterBar({
         }}
       >
         {/* Left: dropdown + count */}
-        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+          <span style={{
+            fontSize: "10px",
+            fontWeight: 700,
+            color: "#334155",
+            textTransform: "uppercase",
+            letterSpacing: "0.1em",
+            flexShrink: 0,
+          }}>
+            Filter by
+          </span>
           {/* Searchable dropdown */}
           <div ref={dropdownRef} style={{ position: "relative" }}>
             <button
@@ -245,41 +255,47 @@ function FilterBar({
               style={{
                 display: "flex",
                 alignItems: "center",
-                gap: "8px",
-                padding: "8px 14px",
-                borderRadius: "10px",
+                gap: "10px",
+                padding: "10px 16px",
+                borderRadius: "12px",
                 fontSize: "13px",
                 fontWeight: 700,
-                border: "1px solid",
+                border: "none",
                 cursor: "pointer",
                 transition: "all 0.2s",
-                minWidth: "190px",
-                backgroundColor: activeCat ? activeCat.color + "18" : "#1f2937",
-                borderColor: activeCat ? activeCat.color + "50" : "#374151",
-                color: activeCat ? activeCat.color : "#94a3b8",
+                minWidth: "210px",
+                background: activeCat
+                  ? `linear-gradient(135deg, ${activeCat.color}22, ${activeCat.color}10)`
+                  : "linear-gradient(135deg, rgba(99,102,241,0.18), rgba(139,92,246,0.10))",
+                color: activeCat ? activeCat.color : "#a5b4fc",
+                boxShadow: activeCat
+                  ? `0 0 0 1.5px ${activeCat.color}60, 0 0 16px ${activeCat.color}25`
+                  : "0 0 0 1.5px rgba(99,102,241,0.5), 0 0 16px rgba(99,102,241,0.15)",
               }}
             >
-              {activeCat && (
-                <span
-                  style={{
-                    width: "8px",
-                    height: "8px",
-                    borderRadius: "50%",
-                    backgroundColor: activeCat.color,
-                    flexShrink: 0,
-                  }}
-                />
-              )}
-              <span style={{ flex: 1, textAlign: "left" }}>
+              <span
+                style={{
+                  width: "9px",
+                  height: "9px",
+                  borderRadius: "50%",
+                  backgroundColor: activeCat ? activeCat.color : "#6366f1",
+                  flexShrink: 0,
+                  boxShadow: `0 0 6px ${activeCat ? activeCat.color : "#6366f1"}`,
+                }}
+              />
+              <span style={{ flex: 1, textAlign: "left", letterSpacing: "0.01em" }}>
                 {activeCat ? activeCat.name : "All Teams"}
               </span>
               <span
                 style={{
-                  fontSize: "10px",
-                  backgroundColor: activeCat ? activeCat.color + "30" : "#374151",
-                  padding: "1px 6px",
+                  fontSize: "11px",
+                  fontWeight: 800,
+                  backgroundColor: activeCat ? activeCat.color + "25" : "rgba(99,102,241,0.25)",
+                  padding: "2px 8px",
                   borderRadius: "999px",
-                  color: activeCat ? activeCat.color : "#64748b",
+                  color: activeCat ? activeCat.color : "#818cf8",
+                  minWidth: "24px",
+                  textAlign: "center",
                 }}
               >
                 {activeCat
@@ -287,12 +303,12 @@ function FilterBar({
                   : projects.length}
               </span>
               <ChevronDown
-                size={13}
+                size={14}
                 style={{
                   transition: "transform 0.2s",
                   transform: open ? "rotate(180deg)" : "rotate(0deg)",
                   flexShrink: 0,
-                  color: activeCat ? activeCat.color : "#64748b",
+                  color: activeCat ? activeCat.color : "#818cf8",
                 }}
               />
             </button>
