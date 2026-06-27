@@ -316,6 +316,20 @@
         "finance-team",
         "ce"
       ]
+    },
+    {
+      "id": "mqw2zzy5uikl0",
+      "name": "Auto Marker for Typst",
+      "version": "",
+      "purpose": "To mark MCQ, CQand other stickers automatically.",
+      "demoLink": "https://auto-marker-tool.vercel.app/",
+      "githubLink": "https://github.com/cm-ops-gmail/auto-marker-tool/tree/main",
+      "videoLink": "",
+      "guidelineLink": "",
+      "alternativeLink": "",
+      "categories": [
+        "ce"
+      ]
     }
   ],
   "categoryOrder": {
