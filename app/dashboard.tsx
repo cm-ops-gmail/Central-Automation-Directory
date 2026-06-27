@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ProjectsData, Project, Category } from "./types";
@@ -12,7 +12,9 @@ import {
   Search,
   Settings,
   ChevronRight,
+  ChevronDown,
   Link as LinkIcon,
+  Check,
 } from "lucide-react";
 
 function isUrl(val: string | null | undefined): val is string {
@@ -167,6 +169,345 @@ function ProjectCard({
   );
 }
 
+// ── Filter bar with searchable dropdown ──────────────────────────────────
+
+function FilterBar({
+  categories,
+  projects,
+  activeCategory,
+  setActiveCategory,
+  search,
+  setSearch,
+  filteredCount,
+}: {
+  categories: Category[];
+  projects: Project[];
+  activeCategory: string;
+  setActiveCategory: (id: string) => void;
+  search: string;
+  setSearch: (s: string) => void;
+  filteredCount: number;
+}) {
+  const [open, setOpen] = useState(false);
+  const [ddSearch, setDdSearch] = useState("");
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClick(e: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setOpen(false);
+        setDdSearch("");
+      }
+    }
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, []);
+
+  const activeCat = categories.find((c) => c.id === activeCategory);
+
+  const filteredCats = ddSearch.trim()
+    ? categories.filter((c) => c.name.toLowerCase().includes(ddSearch.toLowerCase()))
+    : categories;
+
+  function select(id: string) {
+    setActiveCategory(id);
+    setOpen(false);
+    setDdSearch("");
+  }
+
+  return (
+    <div
+      style={{
+        position: "sticky",
+        top: "140px",
+        zIndex: 40,
+        backgroundColor: "#040b16",
+        borderBottom: "1px solid #1a2535",
+        padding: "12px 24px",
+      }}
+    >
+      <div
+        style={{
+          maxWidth: "1280px",
+          margin: "0 auto",
+          display: "flex",
+          alignItems: "center",
+          gap: "10px",
+          justifyContent: "space-between",
+        }}
+      >
+        {/* Left: dropdown + count */}
+        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+          {/* Searchable dropdown */}
+          <div ref={dropdownRef} style={{ position: "relative" }}>
+            <button
+              onClick={() => { setOpen((o) => !o); setDdSearch(""); }}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "8px",
+                padding: "8px 14px",
+                borderRadius: "10px",
+                fontSize: "13px",
+                fontWeight: 700,
+                border: "1px solid",
+                cursor: "pointer",
+                transition: "all 0.2s",
+                minWidth: "190px",
+                backgroundColor: activeCat ? activeCat.color + "18" : "#1f2937",
+                borderColor: activeCat ? activeCat.color + "50" : "#374151",
+                color: activeCat ? activeCat.color : "#94a3b8",
+              }}
+            >
+              {activeCat && (
+                <span
+                  style={{
+                    width: "8px",
+                    height: "8px",
+                    borderRadius: "50%",
+                    backgroundColor: activeCat.color,
+                    flexShrink: 0,
+                  }}
+                />
+              )}
+              <span style={{ flex: 1, textAlign: "left" }}>
+                {activeCat ? activeCat.name : "All Teams"}
+              </span>
+              <span
+                style={{
+                  fontSize: "10px",
+                  backgroundColor: activeCat ? activeCat.color + "30" : "#374151",
+                  padding: "1px 6px",
+                  borderRadius: "999px",
+                  color: activeCat ? activeCat.color : "#64748b",
+                }}
+              >
+                {activeCat
+                  ? projects.filter((p) => p.categories.includes(activeCat.id)).length
+                  : projects.length}
+              </span>
+              <ChevronDown
+                size={13}
+                style={{
+                  transition: "transform 0.2s",
+                  transform: open ? "rotate(180deg)" : "rotate(0deg)",
+                  flexShrink: 0,
+                  color: activeCat ? activeCat.color : "#64748b",
+                }}
+              />
+            </button>
+
+            {open && (
+              <div
+                style={{
+                  position: "absolute",
+                  top: "calc(100% + 6px)",
+                  left: 0,
+                  minWidth: "230px",
+                  backgroundColor: "#0f172a",
+                  border: "1px solid #1f2937",
+                  borderRadius: "14px",
+                  boxShadow: "0 16px 40px rgba(0,0,0,0.6), 0 0 0 1px rgba(99,102,241,0.1)",
+                  overflow: "hidden",
+                  zIndex: 100,
+                }}
+              >
+                {/* Search inside dropdown */}
+                <div
+                  style={{
+                    padding: "10px 12px",
+                    borderBottom: "1px solid #1a2535",
+                  }}
+                >
+                  <div style={{ position: "relative" }}>
+                    <Search
+                      size={11}
+                      style={{
+                        position: "absolute",
+                        left: "10px",
+                        top: "50%",
+                        transform: "translateY(-50%)",
+                        color: "#475569",
+                      }}
+                    />
+                    <input
+                      autoFocus
+                      type="text"
+                      placeholder="Search teams..."
+                      value={ddSearch}
+                      onChange={(e) => setDdSearch(e.target.value)}
+                      style={{
+                        width: "100%",
+                        paddingLeft: "28px",
+                        paddingRight: "8px",
+                        paddingTop: "6px",
+                        paddingBottom: "6px",
+                        fontSize: "12px",
+                        backgroundColor: "#0a0f1e",
+                        border: "1px solid #1f2937",
+                        borderRadius: "8px",
+                        color: "#cbd5e1",
+                        outline: "none",
+                        boxSizing: "border-box",
+                      }}
+                    />
+                  </div>
+                </div>
+
+                {/* Options */}
+                <div style={{ maxHeight: "260px", overflowY: "auto" }}>
+                  {/* All option */}
+                  {(!ddSearch.trim()) && (
+                    <button
+                      onClick={() => select("all")}
+                      style={{
+                        width: "100%",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "10px",
+                        padding: "10px 14px",
+                        fontSize: "13px",
+                        fontWeight: 600,
+                        border: "none",
+                        cursor: "pointer",
+                        backgroundColor: activeCategory === "all" ? "rgba(99,102,241,0.12)" : "transparent",
+                        color: activeCategory === "all" ? "#818cf8" : "#94a3b8",
+                        textAlign: "left",
+                        borderBottom: "1px solid #1a2535",
+                        transition: "background-color 0.15s",
+                      }}
+                      onMouseEnter={(e) => { if (activeCategory !== "all") (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#1a2535"; }}
+                      onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = activeCategory === "all" ? "rgba(99,102,241,0.12)" : "transparent"; }}
+                    >
+                      <span
+                        style={{
+                          width: "8px",
+                          height: "8px",
+                          borderRadius: "50%",
+                          backgroundColor: "#6366f1",
+                          flexShrink: 0,
+                        }}
+                      />
+                      <span style={{ flex: 1 }}>All Teams</span>
+                      <span
+                        style={{
+                          fontSize: "10px",
+                          backgroundColor: "rgba(99,102,241,0.2)",
+                          color: "#818cf8",
+                          padding: "1px 6px",
+                          borderRadius: "999px",
+                        }}
+                      >
+                        {projects.length}
+                      </span>
+                      {activeCategory === "all" && <Check size={12} style={{ color: "#818cf8", flexShrink: 0 }} />}
+                    </button>
+                  )}
+
+                  {filteredCats.map((cat) => {
+                    const count = projects.filter((p) => p.categories.includes(cat.id)).length;
+                    const isActive = activeCategory === cat.id;
+                    const rgb = hexToRgb(cat.color);
+                    return (
+                      <button
+                        key={cat.id}
+                        onClick={() => select(cat.id)}
+                        style={{
+                          width: "100%",
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "10px",
+                          padding: "10px 14px",
+                          fontSize: "13px",
+                          fontWeight: 600,
+                          border: "none",
+                          cursor: "pointer",
+                          backgroundColor: isActive ? `rgba(${rgb},0.12)` : "transparent",
+                          color: isActive ? cat.color : "#94a3b8",
+                          textAlign: "left",
+                          transition: "background-color 0.15s",
+                        }}
+                        onMouseEnter={(e) => { if (!isActive) (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#1a2535"; }}
+                        onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = isActive ? `rgba(${rgb},0.12)` : "transparent"; }}
+                      >
+                        <span
+                          style={{
+                            width: "8px",
+                            height: "8px",
+                            borderRadius: "50%",
+                            backgroundColor: cat.color,
+                            flexShrink: 0,
+                          }}
+                        />
+                        <span style={{ flex: 1 }}>{cat.name}</span>
+                        <span
+                          style={{
+                            fontSize: "10px",
+                            backgroundColor: `rgba(${rgb},0.2)`,
+                            color: cat.color,
+                            padding: "1px 6px",
+                            borderRadius: "999px",
+                          }}
+                        >
+                          {count}
+                        </span>
+                        {isActive && <Check size={12} style={{ color: cat.color, flexShrink: 0 }} />}
+                      </button>
+                    );
+                  })}
+
+                  {filteredCats.length === 0 && (
+                    <div style={{ padding: "16px 14px", fontSize: "12px", color: "#374151", textAlign: "center" }}>
+                      No teams found
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+
+          <span style={{ fontSize: "12px", color: "#334155" }}>
+            {filteredCount} tool{filteredCount !== 1 ? "s" : ""}
+          </span>
+        </div>
+
+        {/* Right: search */}
+        <div style={{ position: "relative", flexShrink: 0 }}>
+          <Search
+            size={12}
+            style={{
+              position: "absolute",
+              left: "12px",
+              top: "50%",
+              transform: "translateY(-50%)",
+              color: "#475569",
+            }}
+          />
+          <input
+            type="text"
+            placeholder="Search tools..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            style={{
+              paddingLeft: "32px",
+              paddingRight: "12px",
+              paddingTop: "8px",
+              paddingBottom: "8px",
+              fontSize: "12px",
+              backgroundColor: "#0f172a",
+              border: "1px solid #1f2937",
+              borderRadius: "10px",
+              color: "#cbd5e1",
+              outline: "none",
+              width: "220px",
+            }}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ── Dashboard ─────────────────────────────────────────────────────────────
 
 export default function Dashboard({
@@ -306,117 +647,15 @@ export default function Dashboard({
       </nav>
 
       {/* ── Filter bar ───────────────────────────────────────────────────── */}
-      <div
-        style={{
-          position: "sticky",
-          top: "140px",
-          zIndex: 40,
-          backgroundColor: "#040b16",
-          borderBottom: "1px solid #1a2535",
-          padding: "12px 24px",
-        }}
-      >
-        <div
-          style={{
-            maxWidth: "1280px",
-            margin: "0 auto",
-            display: "flex",
-            flexWrap: "wrap",
-            gap: "10px",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          {/* Category tabs */}
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
-            {/* All tab */}
-            <button
-              onClick={() => setActiveCategory("all")}
-              style={{
-                padding: "6px 14px",
-                borderRadius: "10px",
-                fontSize: "12px",
-                fontWeight: 700,
-                border: "none",
-                cursor: "pointer",
-                transition: "all 0.2s",
-                backgroundColor: activeCategory === "all" ? "#6366f1" : "#1f2937",
-                color: activeCategory === "all" ? "white" : "#94a3b8",
-              }}
-            >
-              All{" "}
-              <span style={{ fontSize: "10px", opacity: 0.7 }}>
-                {initialData.projects.length}
-              </span>
-            </button>
-
-            {initialData.categories.map((cat) => {
-              const count = initialData.projects.filter((p) =>
-                p.categories.includes(cat.id)
-              ).length;
-              const isActive = activeCategory === cat.id;
-              const rgb = hexToRgb(cat.color);
-              return (
-                <button
-                  key={cat.id}
-                  onClick={() => setActiveCategory(cat.id)}
-                  style={{
-                    padding: "6px 14px",
-                    borderRadius: "10px",
-                    fontSize: "12px",
-                    fontWeight: 700,
-                    border: "none",
-                    cursor: "pointer",
-                    transition: "all 0.2s",
-                    backgroundColor: isActive ? cat.color : `rgba(${rgb},0.1)`,
-                    color: isActive ? "white" : cat.color,
-                  }}
-                >
-                  {cat.name}{" "}
-                  <span
-                    style={{
-                      fontSize: "10px",
-                      backgroundColor: isActive ? "rgba(255,255,255,0.2)" : `rgba(${rgb},0.2)`,
-                      padding: "1px 5px",
-                      borderRadius: "999px",
-                      marginLeft: "2px",
-                    }}
-                  >
-                    {count}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Search */}
-          <div style={{ position: "relative", flexShrink: 0 }}>
-            <Search
-              size={12}
-              style={{ position: "absolute", left: "12px", top: "50%", transform: "translateY(-50%)", color: "#475569" }}
-            />
-            <input
-              type="text"
-              placeholder="Search tools..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              style={{
-                paddingLeft: "32px",
-                paddingRight: "12px",
-                paddingTop: "8px",
-                paddingBottom: "8px",
-                fontSize: "12px",
-                backgroundColor: "#0f172a",
-                border: "1px solid #1f2937",
-                borderRadius: "10px",
-                color: "#cbd5e1",
-                outline: "none",
-                width: "220px",
-              }}
-            />
-          </div>
-        </div>
-      </div>
+      <FilterBar
+        categories={initialData.categories}
+        projects={initialData.projects}
+        activeCategory={activeCategory}
+        setActiveCategory={setActiveCategory}
+        search={search}
+        setSearch={setSearch}
+        filteredCount={filteredProjects.length}
+      />
 
       {/* ── Main content ─────────────────────────────────────────────────── */}
       <main
