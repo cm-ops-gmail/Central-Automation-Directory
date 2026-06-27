@@ -34,6 +34,11 @@
       "id": "program-&-content-managers",
       "name": "Program & Content Managers",
       "color": "#6366f1"
+    },
+    {
+      "id": "finance-team",
+      "name": "Finance Team",
+      "color": "#6366f1"
     }
   ],
   "projects": [
