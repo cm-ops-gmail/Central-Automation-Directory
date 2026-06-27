@@ -339,9 +339,9 @@
       "theory-maker",
       "agentic-root-file-ocr",
       "content-ocr",
+      "content-ops-requisition-dashboard",
       "paste-image-get-link",
-      null,
-      "content-ops-requisition-dashboard"
+      null
     ],
     "cpd": [
       "katex-formatter",
