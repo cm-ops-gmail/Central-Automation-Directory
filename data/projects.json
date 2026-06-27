@@ -214,14 +214,16 @@
     {
       "id": "class-ops-live-monitoring",
       "name": "Class Ops Live Class Monitoring Dashboard",
-      "version": null,
+      "version": "",
       "purpose": "To monitor daily and upcoming live class requirements in real time.",
       "demoLink": "https://ops-live-class-monitoring-dashboard.vercel.app/",
       "githubLink": "https://github.com/cm-ops-gmail/live-class-monitoring",
-      "videoLink": null,
-      "guidelineLink": null,
+      "videoLink": "",
+      "guidelineLink": "",
+      "alternativeLink": "",
       "categories": [
-        "class-ops"
+        "class-ops",
+        "dashboards"
       ]
     },
     {
