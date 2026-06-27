@@ -189,9 +189,9 @@ export default function Dashboard({
     }
   }, [router]);
 
-  if (!authed) return null;
-
+  // All hooks must run before any conditional return
   const filteredProjects = useMemo(() => {
+    if (!authed) return [];
     let list = initialData.projects;
     if (activeCategory !== "all") {
       list = list.filter((p) => p.categories.includes(activeCategory));
@@ -205,18 +205,7 @@ export default function Dashboard({
       );
     }
     return list;
-  }, [initialData, activeCategory, search]);
-
-  // Returns projects for a category sorted by the saved order
-  function orderedForCategory(catId: string, projects: Project[]): Project[] {
-    const order = initialData.categoryOrder?.[catId];
-    if (!order || order.length === 0) return projects;
-    const indexed = new Map(order.map((id, i) => [id, i]));
-    return [...projects].sort(
-      (a, b) =>
-        (indexed.get(a.id) ?? 9999) - (indexed.get(b.id) ?? 9999)
-    );
-  }
+  }, [authed, initialData, activeCategory, search]);
 
   const visibleCategories = useMemo(() => {
     if (activeCategory !== "all") {
@@ -231,6 +220,18 @@ export default function Dashboard({
     () => filteredProjects.filter((p) => p.categories.length === 0),
     [filteredProjects]
   );
+
+  if (!authed) return null;
+
+  function orderedForCategory(catId: string, projects: Project[]): Project[] {
+    const order = initialData.categoryOrder?.[catId];
+    if (!order || order.length === 0) return projects;
+    const indexed = new Map(order.map((id, i) => [id, i]));
+    return [...projects].sort(
+      (a, b) =>
+        (indexed.get(a.id) ?? 9999) - (indexed.get(b.id) ?? 9999)
+    );
+  }
 
   return (
     <div style={{ minHeight: "100vh", backgroundColor: "#030712" }}>
