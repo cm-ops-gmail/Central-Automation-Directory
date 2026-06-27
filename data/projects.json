@@ -300,6 +300,22 @@
         "cdt",
         "ce"
       ]
+    },
+    {
+      "id": "mqvzsqa5c0d0k",
+      "name": "Finance Budget & Requisition Tracker",
+      "version": "",
+      "purpose": "A centralized executive dashboard for monitoring, comparing and exporting budget allocations vs. actual spend across teams, quarters and entities in real time",
+      "demoLink": "https://10ms-finance-budget-tracker.vercel.app/",
+      "githubLink": "https://github.com/cm-ops-gmail/Finance-Budget-Tracker",
+      "videoLink": "",
+      "guidelineLink": "",
+      "alternativeLink": "",
+      "categories": [
+        "program-&-content-managers",
+        "finance-team",
+        "ce"
+      ]
     }
   ],
   "categoryOrder": {
