@@ -425,128 +425,9 @@ export default function Dashboard({
           padding: "40px 24px",
         }}
       >
-        {visibleCategories.map((cat) => {
-          const catProjects = filteredProjects.filter((p) =>
-            p.categories.includes(cat.id)
-          );
-          if (catProjects.length === 0) return null;
-          const rgb = hexToRgb(cat.color);
-
-          return (
-            <div key={cat.id} style={{ marginBottom: "48px" }}>
-              {/* Section header */}
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "12px",
-                  marginBottom: "20px",
-                }}
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "8px",
-                    padding: "6px 14px",
-                    borderRadius: "10px",
-                    backgroundColor: `rgba(${rgb},0.12)`,
-                    border: `1px solid rgba(${rgb},0.3)`,
-                    flexShrink: 0,
-                  }}
-                >
-                  <div
-                    style={{
-                      width: "7px",
-                      height: "7px",
-                      borderRadius: "999px",
-                      backgroundColor: cat.color,
-                    }}
-                  />
-                  <span
-                    style={{
-                      fontWeight: 800,
-                      fontSize: "13px",
-                      color: cat.color,
-                    }}
-                  >
-                    {cat.name}
-                  </span>
-                </div>
-                <div
-                  style={{
-                    flex: 1,
-                    height: "1px",
-                    background: `linear-gradient(90deg, rgba(${rgb},0.4) 0%, transparent 100%)`,
-                  }}
-                />
-                <span
-                  style={{
-                    fontSize: "11px",
-                    fontWeight: 700,
-                    color: cat.color,
-                    backgroundColor: `rgba(${rgb},0.12)`,
-                    padding: "2px 8px",
-                    borderRadius: "999px",
-                    flexShrink: 0,
-                  }}
-                >
-                  {catProjects.length}
-                </span>
-              </div>
-
-              {/* Cards grid */}
-              <div
-                className="hub-grid"
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
-                  gap: "16px",
-                }}
-              >
-                {orderedForCategory(cat.id, catProjects).map((project, i) => (
-                  <ProjectCard
-                    key={project.id}
-                    project={project}
-                    categories={initialData.categories}
-                    index={i}
-                  />
-                ))}
-              </div>
-            </div>
-          );
-        })}
-
-        {/* Uncategorised */}
-        {uncategorised.length > 0 && (
-          <div style={{ marginBottom: "48px" }}>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "12px",
-                marginBottom: "20px",
-              }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "8px",
-                  padding: "6px 14px",
-                  borderRadius: "10px",
-                  backgroundColor: "#1f2937",
-                  border: "1px solid #374151",
-                  flexShrink: 0,
-                }}
-              >
-                <div style={{ width: "7px", height: "7px", borderRadius: "999px", backgroundColor: "#64748b" }} />
-                <span style={{ fontWeight: 800, fontSize: "13px", color: "#64748b" }}>
-                  Uncategorised
-                </span>
-              </div>
-              <div style={{ flex: 1, height: "1px", backgroundColor: "#1f2937" }} />
-            </div>
+        {activeCategory === "all" ? (
+          /* Flat grid — no repetition for multi-category projects */
+          filteredProjects.length > 0 ? (
             <div
               className="hub-grid"
               style={{
@@ -555,7 +436,7 @@ export default function Dashboard({
                 gap: "16px",
               }}
             >
-              {uncategorised.map((project, i) => (
+              {filteredProjects.map((project, i) => (
                 <ProjectCard
                   key={project.id}
                   project={project}
@@ -564,18 +445,164 @@ export default function Dashboard({
                 />
               ))}
             </div>
-          </div>
-        )}
+          ) : (
+            <div style={{ textAlign: "center", padding: "80px 0" }}>
+              <div style={{ fontSize: "48px", marginBottom: "12px", opacity: 0.3 }}>⚡</div>
+              <p style={{ color: "#64748b", fontWeight: 600, fontSize: "16px" }}>No tools found</p>
+              <p style={{ color: "#334155", fontSize: "13px", marginTop: "4px" }}>
+                Try a different search or filter
+              </p>
+            </div>
+          )
+        ) : (
+          /* Category-grouped view for specific team filter */
+          <>
+            {visibleCategories.map((cat) => {
+              const catProjects = filteredProjects.filter((p) =>
+                p.categories.includes(cat.id)
+              );
+              if (catProjects.length === 0) return null;
+              const rgb = hexToRgb(cat.color);
 
-        {/* Empty state */}
-        {filteredProjects.length === 0 && (
-          <div style={{ textAlign: "center", padding: "80px 0" }}>
-            <div style={{ fontSize: "48px", marginBottom: "12px", opacity: 0.3 }}>⚡</div>
-            <p style={{ color: "#64748b", fontWeight: 600, fontSize: "16px" }}>No tools found</p>
-            <p style={{ color: "#334155", fontSize: "13px", marginTop: "4px" }}>
-              Try a different search or filter
-            </p>
-          </div>
+              return (
+                <div key={cat.id} style={{ marginBottom: "48px" }}>
+                  {/* Section header */}
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "12px",
+                      marginBottom: "20px",
+                    }}
+                  >
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "8px",
+                        padding: "6px 14px",
+                        borderRadius: "10px",
+                        backgroundColor: `rgba(${rgb},0.12)`,
+                        border: `1px solid rgba(${rgb},0.3)`,
+                        flexShrink: 0,
+                      }}
+                    >
+                      <div
+                        style={{
+                          width: "7px",
+                          height: "7px",
+                          borderRadius: "999px",
+                          backgroundColor: cat.color,
+                        }}
+                      />
+                      <span style={{ fontWeight: 800, fontSize: "13px", color: cat.color }}>
+                        {cat.name}
+                      </span>
+                    </div>
+                    <div
+                      style={{
+                        flex: 1,
+                        height: "1px",
+                        background: `linear-gradient(90deg, rgba(${rgb},0.4) 0%, transparent 100%)`,
+                      }}
+                    />
+                    <span
+                      style={{
+                        fontSize: "11px",
+                        fontWeight: 700,
+                        color: cat.color,
+                        backgroundColor: `rgba(${rgb},0.12)`,
+                        padding: "2px 8px",
+                        borderRadius: "999px",
+                        flexShrink: 0,
+                      }}
+                    >
+                      {catProjects.length}
+                    </span>
+                  </div>
+
+                  {/* Cards grid */}
+                  <div
+                    className="hub-grid"
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
+                      gap: "16px",
+                    }}
+                  >
+                    {orderedForCategory(cat.id, catProjects).map((project, i) => (
+                      <ProjectCard
+                        key={project.id}
+                        project={project}
+                        categories={initialData.categories}
+                        index={i}
+                      />
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+
+            {/* Uncategorised — only shown in category filter view */}
+            {uncategorised.length > 0 && (
+              <div style={{ marginBottom: "48px" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "12px",
+                    marginBottom: "20px",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "8px",
+                      padding: "6px 14px",
+                      borderRadius: "10px",
+                      backgroundColor: "#1f2937",
+                      border: "1px solid #374151",
+                      flexShrink: 0,
+                    }}
+                  >
+                    <div style={{ width: "7px", height: "7px", borderRadius: "999px", backgroundColor: "#64748b" }} />
+                    <span style={{ fontWeight: 800, fontSize: "13px", color: "#64748b" }}>
+                      Uncategorised
+                    </span>
+                  </div>
+                  <div style={{ flex: 1, height: "1px", backgroundColor: "#1f2937" }} />
+                </div>
+                <div
+                  className="hub-grid"
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
+                    gap: "16px",
+                  }}
+                >
+                  {uncategorised.map((project, i) => (
+                    <ProjectCard
+                      key={project.id}
+                      project={project}
+                      categories={initialData.categories}
+                      index={i}
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {filteredProjects.length === 0 && (
+              <div style={{ textAlign: "center", padding: "80px 0" }}>
+                <div style={{ fontSize: "48px", marginBottom: "12px", opacity: 0.3 }}>⚡</div>
+                <p style={{ color: "#64748b", fontWeight: 600, fontSize: "16px" }}>No tools found</p>
+                <p style={{ color: "#334155", fontSize: "13px", marginTop: "4px" }}>
+                  Try a different search or filter
+                </p>
+              </div>
+            )}
+          </>
         )}
       </main>
 
