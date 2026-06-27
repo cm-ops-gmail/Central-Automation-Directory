@@ -329,9 +329,23 @@ function OrderTab({ data, onOrderSaved }: { data: ProjectsData; onOrderSaved: ()
     }
   }
 
+  // Returns the full display list for a category (order + any unlisted projects)
+  function getMerged(catId: string): string[] {
+    const catOrderIds = order[catId] ?? [];
+    const allCatIds = data.projects
+      .filter((p) => p.categories.includes(catId))
+      .map((p) => p.id);
+    return [
+      ...catOrderIds.filter((id) => allCatIds.includes(id)),
+      ...allCatIds.filter((id) => !catOrderIds.includes(id)),
+    ];
+  }
+
   function moveItem(catId: string, fromIdx: number, toIdx: number) {
-    if (toIdx < 0 || toIdx >= (order[catId]?.length ?? 0)) return;
-    const arr = [...(order[catId] ?? [])];
+    // Use the same merged list as the UI so indices always match
+    const mergedList = getMerged(catId);
+    if (toIdx < 0 || toIdx >= mergedList.length) return;
+    const arr = [...mergedList];
     const [item] = arr.splice(fromIdx, 1);
     arr.splice(toIdx, 0, item);
     const newOrder = { ...order, [catId]: arr };
@@ -388,15 +402,7 @@ function OrderTab({ data, onOrderSaved }: { data: ProjectsData; onOrderSaved: ()
       </div>
 
       {data.categories.map((cat) => {
-        const catOrderIds = order[cat.id] ?? [];
-        // Include any projects belonging to this category not yet in the order list
-        const allCatIds = data.projects
-          .filter((p) => p.categories.includes(cat.id))
-          .map((p) => p.id);
-        const merged = [
-          ...catOrderIds.filter((id) => allCatIds.includes(id)),
-          ...allCatIds.filter((id) => !catOrderIds.includes(id)),
-        ];
+        const merged = getMerged(cat.id);
 
         const r = parseInt(cat.color.slice(1, 3), 16);
         const g = parseInt(cat.color.slice(3, 5), 16);
