@@ -406,8 +406,8 @@
     ],
     "dashboards": [
       "class-insights-teacher-profile",
-      "class-ops-live-monitoring",
       "studio-booking-dashboard",
+      "class-ops-live-monitoring",
       "content-ops-requisition-dashboard",
       "mqvzsqa5c0d0k"
     ]
