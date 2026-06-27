@@ -340,8 +340,8 @@
       "agentic-root-file-ocr",
       "content-ocr",
       "paste-image-get-link",
-      "content-ops-requisition-dashboard",
-      null
+      null,
+      "content-ops-requisition-dashboard"
     ],
     "cpd": [
       "katex-formatter",
