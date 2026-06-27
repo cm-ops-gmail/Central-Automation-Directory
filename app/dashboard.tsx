@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ProjectsData, Project, Category } from "./types";
 import {
@@ -173,8 +174,22 @@ export default function Dashboard({
 }: {
   initialData: ProjectsData;
 }) {
+  const router = useRouter();
   const [activeCategory, setActiveCategory] = useState<string>("all");
   const [search, setSearch] = useState("");
+  const [authed, setAuthed] = useState(false);
+
+  useEffect(() => {
+    const viewer = localStorage.getItem("hub_viewer") === "1";
+    const admin = localStorage.getItem("hub_admin") === "1";
+    if (viewer || admin) {
+      setAuthed(true);
+    } else {
+      router.replace("/login");
+    }
+  }, [router]);
+
+  if (!authed) return null;
 
   const filteredProjects = useMemo(() => {
     let list = initialData.projects;
