@@ -279,6 +279,22 @@
         "cdt",
         "cpd"
       ]
+    },
+    {
+      "id": "mqvznuusj86xf",
+      "name": "Image Grayscale",
+      "version": "",
+      "purpose": "Convert color photos to rich, film-like black & white in your browser, with no uploads and lossless PNG export.",
+      "demoLink": "https://image-grayscaler.vercel.app/",
+      "githubLink": "https://github.com/cm-ops-gmail/image-grayscale",
+      "videoLink": "",
+      "guidelineLink": "",
+      "alternativeLink": "",
+      "categories": [
+        "cpd",
+        "cdt",
+        "ce"
+      ]
     }
   ],
   "categoryOrder": {
