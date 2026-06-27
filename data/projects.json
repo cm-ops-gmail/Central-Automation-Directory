@@ -353,6 +353,7 @@
       "agentic-root-file-ocr",
       "content-ocr",
       "paste-image-get-link",
+      null,
       "content-ops-requisition-dashboard"
     ],
     "ce": [
