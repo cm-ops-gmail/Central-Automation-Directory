@@ -344,6 +344,21 @@
       "categories": [
         "ce"
       ]
+    },
+    {
+      "id": "mqz6p382a901t",
+      "name": "10MS SEO Agent",
+      "version": "1.1",
+      "purpose": "An automated SEO agent, built using existing data, that will give us the SEO data for future courses and programs",
+      "demoLink": "https://10-ms-seo-agent.vercel.app/",
+      "githubLink": "https://github.com/hades874/10MS-SEO-Agent",
+      "videoLink": "",
+      "guidelineLink": "",
+      "alternativeLink": "",
+      "categories": [
+        "ce",
+        "marketing"
+      ]
     }
   ],
   "categoryOrder": {
