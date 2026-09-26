@@ -393,6 +393,22 @@
         "dashboards",
         "hr"
       ]
+    },
+    {
+      "id": "muim0zjaphk8v",
+      "name": "TA - DA Management System",
+      "version": "",
+      "purpose": "This HR project is a TA/DA Requisition and Management System** that allows employees to submit TA/DA requests, enables HR to monitor and manage requisitions, and allows Finance to **process and disburse payments based on approved requests**. The system streamlines the entire process through **requisition tracking, approval monitoring, and payment automation.",
+      "demoLink": "https://ta-da-management-system.vercel.app/",
+      "githubLink": "https://github.com/tenminschool/ta-da-management-system",
+      "videoLink": "",
+      "guidelineLink": "",
+      "alternativeLink": "",
+      "categories": [
+        "hr",
+        "dashboards",
+        "finance-team"
+      ]
     }
   ],
   "categoryOrder": {
