@@ -373,6 +373,20 @@
       "categories": [
         "class-ops"
       ]
+    },
+    {
+      "id": "muilum35kdjxe",
+      "name": "Table Tennis Booking",
+      "version": "",
+      "purpose": "This HR dashboard allows employees to **book available table tennis slots** and enables HR to **monitor bookings, schedules, and overall usage** of the table tennis facility.",
+      "demoLink": "https://hq.10minuteschool.net/table-tennis-booking",
+      "githubLink": "https://github.com/cm-ops-gmail/table-tennis-booking",
+      "videoLink": "",
+      "guidelineLink": "",
+      "alternativeLink": "",
+      "categories": [
+        "dashboards"
+      ]
     }
   ],
   "categoryOrder": {
