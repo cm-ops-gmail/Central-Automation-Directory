@@ -429,6 +429,18 @@
         "dashboards",
         "offline-center"
       ]
+    },
+    {
+      "id": "muimikdwomlqb",
+      "name": "English Center ID Card Generation Automation",
+      "version": "",
+      "purpose": "This Google Apps Script automation enables the English Center to provide **instant ID card generation and delivery** for students, streamlining the process and reducing manual effort.",
+      "demoLink": "https://docs.google.com/spreadsheets/d/1usOf5sUvF-jdFTFb0OR_cDziwWcmReHarQG_aNIXMeA/edit?gid=0#gid=0",
+      "githubLink": "https://github.com/cm-ops-gmail/english-center-id-card-automation",
+      "videoLink": "",
+      "guidelineLink": "",
+      "alternativeLink": "",
+      "categories": []
     }
   ],
   "categoryOrder": {
