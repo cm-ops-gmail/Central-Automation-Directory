@@ -359,6 +359,20 @@
         "ce",
         "marketing"
       ]
+    },
+    {
+      "id": "muilr3j5do53r",
+      "name": "Auto Teacher Assign & Live class Monitor",
+      "version": "",
+      "purpose": "This tool enables **one-click assignment of Teachers and Doubt Solvers in the Teacher Dashboard (TD)** and helps monitor all scheduled classes on a daily basis based on the **Run Sheet and Teacher Dashboard (TD)**.\n",
+      "demoLink": "https://live-class-monitor.vercel.app/",
+      "githubLink": "https://github.com/cm-ops-gmail/live-class-monitor",
+      "videoLink": "",
+      "guidelineLink": "",
+      "alternativeLink": "",
+      "categories": [
+        "class-ops"
+      ]
     }
   ],
   "categoryOrder": {
