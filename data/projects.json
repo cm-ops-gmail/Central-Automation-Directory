@@ -414,6 +414,18 @@
         "dashboards",
         "finance-team"
       ]
+    },
+    {
+      "id": "muim8flnzcfh0",
+      "name": "English Center Teacher Performance monitor",
+      "version": "",
+      "purpose": "This dashboard is designed for the **English Center** to monitor teacher performance across all branches based on specific evaluation criteria. It provides **teacher ratings, performance insights, and individual teacher profiles**, enabling the team to track performance trends and identify areas for improvement.",
+      "demoLink": "https://offline-center-teacher-performance.vercel.app/collect",
+      "githubLink": "https://github.com/cm-ops-gmail/offline-center-teacher-performance",
+      "videoLink": "",
+      "guidelineLink": "",
+      "alternativeLink": "",
+      "categories": []
     }
   ],
   "categoryOrder": {
