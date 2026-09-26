@@ -44,6 +44,11 @@
       "id": "dashboards",
       "name": "Dashboards",
       "color": "#f2df64"
+    },
+    {
+      "id": "hr",
+      "name": "HR",
+      "color": "#373768"
     }
   ],
   "projects": [
