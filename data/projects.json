@@ -49,6 +49,11 @@
       "id": "hr",
       "name": "HR",
       "color": "#373768"
+    },
+    {
+      "id": "offline-center",
+      "name": "Offline Center",
+      "color": "#9dc355"
     }
   ],
   "projects": [
