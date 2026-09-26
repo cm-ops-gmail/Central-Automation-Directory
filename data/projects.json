@@ -425,7 +425,10 @@
       "videoLink": "",
       "guidelineLink": "",
       "alternativeLink": "",
-      "categories": []
+      "categories": [
+        "dashboards",
+        "offline-center"
+      ]
     }
   ],
   "categoryOrder": {
