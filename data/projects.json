@@ -443,6 +443,18 @@
       "categories": [
         "offline-center"
       ]
+    },
+    {
+      "id": "muutrmha3gutq",
+      "name": "MCQ Acrapper",
+      "version": "",
+      "purpose": "",
+      "demoLink": "https://mcq-extractor-ten.vercel.app/",
+      "githubLink": "https://github.com/cm-ops-gmail/mcq-extractor",
+      "videoLink": "",
+      "guidelineLink": "",
+      "alternativeLink": "",
+      "categories": []
     }
   ],
   "categoryOrder": {
