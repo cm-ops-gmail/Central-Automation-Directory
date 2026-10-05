@@ -454,7 +454,10 @@
       "videoLink": "",
       "guidelineLink": "",
       "alternativeLink": "",
-      "categories": []
+      "categories": [
+        "ce",
+        "cpd"
+      ]
     }
   ],
   "categoryOrder": {
