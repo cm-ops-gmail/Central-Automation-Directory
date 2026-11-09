@@ -458,6 +458,20 @@
         "ce",
         "cpd"
       ]
+    },
+    {
+      "id": "mw8tj3519mwdx",
+      "name": "Docx to PDF [Typst Converter]",
+      "version": "",
+      "purpose": "Turns a Word chapter (.docx) into a Typst project and a PDF in the browser, with a live preview and an editable editor. The Word layout is kept, and MCQ and CQ parts get the 10 Minute School styling. It can convert several chapters at once into one zip, runs entirely in the browser, and also exports the questions as CSV and Excel.",
+      "demoLink": "https://docx-design-pdf.vercel.app/",
+      "githubLink": "https://github.com/cm-ops-gmail/docx-design-pdf",
+      "videoLink": "",
+      "guidelineLink": "",
+      "alternativeLink": "",
+      "categories": [
+        "ce"
+      ]
     }
   ],
   "categoryOrder": {
