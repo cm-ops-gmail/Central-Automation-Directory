@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Project, Category, ProjectsData } from "../types";
+import { Project, Category, ProjectsData, DesignFile } from "../types";
 import {
   ArrowLeft,
   Plus,
@@ -30,6 +30,7 @@ import {
   ArrowDown,
   ListOrdered,
   CheckCircle2,
+  Palette,
 } from "lucide-react";
 
 // ── helpers ───────────────────────────────────────────────────────────────
@@ -293,7 +294,95 @@ function CategoryForm({
 
 // ── Admin Page ────────────────────────────────────────────────────────────
 
-type Tab = "projects" | "categories" | "order";
+type Tab = "projects" | "categories" | "order" | "design";
+
+// ── DesignFilesTab ────────────────────────────────────────────────────────
+
+function DesignFilesTab({ data, onSaved }: { data: ProjectsData; onSaved: () => void }) {
+  const [files, setFiles] = useState<DesignFile[]>(data.designFiles ?? []);
+  const [saving, setSaving] = useState(false);
+  const [saved, setSaved] = useState(false);
+  const [err, setErr] = useState<string | null>(null);
+
+  function update(id: string, patch: Partial<DesignFile>) {
+    setFiles((fs) => fs.map((f) => (f.id === id ? { ...f, ...patch } : f)));
+    setSaved(false);
+  }
+  function add() {
+    setFiles((fs) => [...fs, { id: generateId(), name: "", link: "" }]);
+    setSaved(false);
+  }
+  function remove(id: string) {
+    setFiles((fs) => fs.filter((f) => f.id !== id));
+    setSaved(false);
+  }
+  function move(i: number, d: number) {
+    setFiles((fs) => {
+      const j = i + d;
+      if (j < 0 || j >= fs.length) return fs;
+      const c = [...fs];
+      [c[i], c[j]] = [c[j], c[i]];
+      return c;
+    });
+    setSaved(false);
+  }
+  async function save() {
+    setSaving(true);
+    setErr(null);
+    try {
+      const res = await fetch("/api/design-files", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ designFiles: files }),
+      });
+      if (!res.ok) throw new Error();
+      setFiles(await res.json());
+      setSaved(true);
+      onSaved();
+    } catch {
+      setErr("Failed to save design files");
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  return (
+    <div className="space-y-4">
+      <div className="flex items-center justify-between gap-3">
+        <button onClick={add}
+          className="flex items-center gap-2 px-5 py-2.5 text-sm font-bold text-slate-300 border border-slate-700 rounded-xl hover:bg-slate-800 transition-all">
+          <Plus size={14} /> Add Design File
+        </button>
+        <div className="flex items-center gap-3">
+          {saved && <span className="text-xs text-emerald-400 flex items-center gap-1"><CheckCircle2 size={13} /> Saved</span>}
+          {err && <span className="text-xs text-red-400">{err}</span>}
+          <button onClick={save} disabled={saving}
+            className="flex items-center gap-2 px-5 py-2.5 text-sm font-bold text-white rounded-xl hover:opacity-90 disabled:opacity-50"
+            style={{ background: "linear-gradient(135deg, #6366f1, #8b5cf6)" }}>
+            <Save size={14} /> {saving ? "Saving..." : "Save Changes"}
+          </button>
+        </div>
+      </div>
+      <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-4 space-y-3">
+        {files.length === 0 && <p className="text-center text-sm text-slate-500 py-8">No design files yet</p>}
+        {files.map((f, i) => (
+          <div key={f.id} className="flex flex-col md:flex-row gap-2 md:items-center">
+            <input className={inputCls} placeholder="Name" value={f.name}
+              onChange={(e) => update(f.id, { name: e.target.value })} />
+            <input className={inputCls} placeholder="Link (https://...)" value={f.link}
+              onChange={(e) => update(f.id, { link: e.target.value })} />
+            <div className="flex gap-1 shrink-0">
+              <button onClick={() => move(i, -1)} className="p-2 rounded-xl text-slate-600 hover:text-white hover:bg-slate-800"><ArrowUp size={13} /></button>
+              <button onClick={() => move(i, 1)} className="p-2 rounded-xl text-slate-600 hover:text-white hover:bg-slate-800"><ArrowDown size={13} /></button>
+              <button onClick={() => remove(f.id)} className="p-2 rounded-xl text-slate-600 hover:text-red-400 hover:bg-red-500/10"><Trash2 size={13} /></button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 
 // ── OrderTab ──────────────────────────────────────────────────────────────
 
@@ -752,6 +841,7 @@ export default function AdminPage() {
             { id: "projects", label: "Projects", icon: <Layers size={14} />, count: data.projects.length },
             { id: "categories", label: "Categories", icon: <Tag size={14} />, count: data.categories.length },
             { id: "order", label: "Order", icon: <ListOrdered size={14} />, count: null },
+            { id: "design", label: "Design Files", icon: <Palette size={14} />, count: (data.designFiles ?? []).length },
           ] as { id: Tab; label: string; icon: React.ReactNode; count: number | null }[]).map(({ id, label, icon, count }) => (
             <button key={id} onClick={() => setTab(id)}
               className={`px-5 py-2.5 text-sm font-bold rounded-xl transition-all flex items-center gap-2 ${
@@ -932,6 +1022,11 @@ export default function AdminPage() {
         {/* ── ORDER TAB ── */}
         {tab === "order" && (
           <OrderTab data={data} onOrderSaved={loadData} />
+        )}
+
+        {/* ── DESIGN FILES TAB ── */}
+        {tab === "design" && (
+          <DesignFilesTab data={data} onSaved={loadData} />
         )}
       </main>
 

@@ -17,8 +17,15 @@ export interface Project {
   categories: string[];
 }
 
+export interface DesignFile {
+  id: string;
+  name: string;
+  link: string;
+}
+
 export interface ProjectsData {
   categories: Category[];
   projects: Project[];
   categoryOrder: Record<string, string[]>;
+  designFiles?: DesignFile[];
 }

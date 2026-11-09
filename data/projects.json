@@ -539,5 +539,22 @@
       "class-ops-live-monitoring",
       "content-ops-requisition-dashboard"
     ]
-  }
+  },
+  "designFiles": [
+    {
+      "id": "tenms-hq-classroomos-design",
+      "name": "Tenms HQ App/ClassroomOS Design",
+      "link": "https://local-design-system.10minuteschool.net/getting-started/design"
+    },
+    {
+      "id": "simulation-design-file",
+      "name": "Simulation Design File",
+      "link": "TenTen - Media Asset Specs"
+    },
+    {
+      "id": "simulation-implementation-guide",
+      "name": "Simulation Implementation Guide",
+      "link": "TenTen - Media Asset Specs"
+    }
+  ]
 }

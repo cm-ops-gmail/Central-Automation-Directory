@@ -3,7 +3,7 @@
 import { useState, useMemo, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { ProjectsData, Project, Category } from "./types";
+import { ProjectsData, Project, Category, DesignFile } from "./types";
 import {
   ExternalLink,
   Github,
@@ -15,6 +15,8 @@ import {
   ChevronDown,
   Link as LinkIcon,
   Check,
+  Layers,
+  Palette,
 } from "lucide-react";
 
 function isUrl(val: string | null | undefined): val is string {
@@ -524,6 +526,80 @@ function FilterBar({
   );
 }
 
+// ── Design files tab ──────────────────────────────────────────────────────
+
+function DesignFilesView({ files }: { files: DesignFile[] }) {
+  return (
+    <div
+      style={{
+        backgroundColor: "#111827",
+        border: "1px solid #1f2937",
+        borderRadius: "16px",
+        overflow: "hidden",
+      }}
+    >
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "minmax(0,1fr) minmax(0,1.4fr)",
+          gap: "16px",
+          padding: "12px 20px",
+          borderBottom: "1px solid #1f2937",
+          fontSize: "10px",
+          fontWeight: 700,
+          color: "#64748b",
+          textTransform: "uppercase",
+          letterSpacing: "0.1em",
+        }}
+      >
+        <span>Name</span>
+        <span>Link</span>
+      </div>
+      {files.length === 0 && (
+        <p style={{ padding: "40px 20px", textAlign: "center", color: "#64748b", fontSize: "13px" }}>
+          No design files yet
+        </p>
+      )}
+      {files.map((f) => (
+        <div
+          key={f.id}
+          style={{
+            display: "grid",
+            gridTemplateColumns: "minmax(0,1fr) minmax(0,1.4fr)",
+            gap: "16px",
+            padding: "14px 20px",
+            borderBottom: "1px solid #1a2535",
+            alignItems: "center",
+            fontSize: "13px",
+          }}
+        >
+          <span style={{ color: "white", fontWeight: 700 }}>{f.name}</span>
+          {isUrl(f.link) ? (
+            <a
+              href={f.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                color: "#818cf8",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "6px",
+                wordBreak: "break-all",
+                textDecoration: "none",
+              }}
+            >
+              <ExternalLink size={12} style={{ flexShrink: 0 }} />
+              {f.link}
+            </a>
+          ) : (
+            <span style={{ color: "#94a3b8" }}>{f.link}</span>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
+
 // ── Dashboard ─────────────────────────────────────────────────────────────
 
 export default function Dashboard({
@@ -535,6 +611,7 @@ export default function Dashboard({
   const [activeCategory, setActiveCategory] = useState<string>("all");
   const [search, setSearch] = useState("");
   const [authed, setAuthed] = useState(false);
+  const [view, setView] = useState<"tools" | "design">("tools");
 
   useEffect(() => {
     const viewer = localStorage.getItem("hub_viewer") === "1";
@@ -662,6 +739,48 @@ export default function Dashboard({
         <div className="nav-glow-line" />
       </nav>
 
+      {/* ── View tabs ────────────────────────────────────────────────────── */}
+      <div style={{ maxWidth: "1280px", margin: "0 auto", padding: "16px 24px 0" }}>
+        <div
+          style={{
+            display: "inline-flex",
+            gap: "4px",
+            padding: "4px",
+            backgroundColor: "#0f172a",
+            border: "1px solid #1f2937",
+            borderRadius: "14px",
+          }}
+        >
+          {([
+            { id: "tools", label: "Tools", icon: <Layers size={14} /> },
+            { id: "design", label: "All Design Files", icon: <Palette size={14} /> },
+          ] as const).map((t) => (
+            <button
+              key={t.id}
+              onClick={() => setView(t.id)}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "8px",
+                padding: "8px 16px",
+                borderRadius: "10px",
+                border: "none",
+                cursor: "pointer",
+                fontSize: "13px",
+                fontWeight: 700,
+                color: view === t.id ? "white" : "#64748b",
+                background: view === t.id ? "linear-gradient(135deg, #6366f1, #8b5cf6)" : "transparent",
+              }}
+            >
+              {t.icon}
+              {t.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {view === "tools" && (
+      <>
       {/* ── Filter bar ───────────────────────────────────────────────────── */}
       <FilterBar
         categories={initialData.categories}
@@ -672,6 +791,8 @@ export default function Dashboard({
         setSearch={setSearch}
         filteredCount={filteredProjects.length}
       />
+      </>
+      )}
 
       {/* ── Main content ─────────────────────────────────────────────────── */}
       <main
@@ -681,7 +802,9 @@ export default function Dashboard({
           padding: "40px 24px",
         }}
       >
-        {activeCategory === "all" ? (
+        {view === "design" ? (
+          <DesignFilesView files={initialData.designFiles ?? []} />
+        ) : activeCategory === "all" ? (
           /* Flat grid — no repetition for multi-category projects */
           filteredProjects.length > 0 ? (
             <div
